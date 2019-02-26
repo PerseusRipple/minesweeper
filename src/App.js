@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { WSA_E_NO_MORE } from "constants";
 
 class App extends Component {
   state = {
     game: [[]],
-    id: 0
+    id: 0,
+    gameStatus: ""
   };
 
   componentDidMount() {
@@ -34,9 +36,22 @@ class App extends Component {
       )
       .then(resp => {
         console.log({ resp });
-        this.setState({
-          game: resp.data.board
-        });
+        if (resp.data.state === "lost") {
+          this.setState({
+            game: resp.data.board,
+            gameStatus: "you lost, sorry try again"
+          });
+        } else if (resp.data.state === "won") {
+          this.setState({
+            game: resp.data.board,
+            gameStatus: "Weeee you won!"
+          });
+        } else {
+          this.setState({
+            game: resp.data.board,
+            gameStatus: "playing..."
+          });
+        }
       });
   }
 
@@ -58,6 +73,25 @@ class App extends Component {
       });
   }
 
+  // endGame(x, y) {
+  //   axios
+  //   .post(
+  //     `https://minesweeper-api.herokuapp.com/games/${this.state.id}/state`,
+  //     {
+  //       id: this.state.id,
+  //         row: x,
+  //         col: y
+
+  //     }
+  //     .then(resp => {
+  //       console.log({ resp});
+  //       this.setState({
+  //         game: resp.data.board
+  //       })
+  //     })
+  //   )
+  // }
+
   render() {
     return (
       <>
@@ -66,6 +100,7 @@ class App extends Component {
             <h1>Ba BOOM!</h1>
           </header>
           <section className="scoreboard">
+            <h2>{this.state.gameStatus}</h2>
             <section className="counter" />
             <section className="timer" />
           </section>
