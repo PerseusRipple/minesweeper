@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { WSA_E_NO_MORE } from "constants";
+import Cell from "./components/Cell";
 
 class App extends Component {
   state = {
@@ -119,7 +120,7 @@ class App extends Component {
                           onClick={() => this.checkForBomb(x, y)}
                           onContextMenu={() => this.flagTile(x, y)}
                         >
-                          {col}
+                          <Cell character={col} />
                         </td>
                       );
                     })}

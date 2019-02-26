@@ -1,20 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Cell extends Component {
   render() {
-    if(this.props.character === "*"){
-      return (
-        
-        <td>
-        <i class="fas fa-ice-cream"></i></td>
+    if (this.props.character === "*") {
+      return <i class="fas fa-ice-cream" />;
+    } else {
+      return <>{this.props.character}</>;
     }
-    else {
-    return (
-      <div>
-        {this.props.character}
-      </div>
-    );
   }
-}
 }
 export default Cell;
