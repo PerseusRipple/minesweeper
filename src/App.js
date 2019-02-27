@@ -96,9 +96,9 @@ class App extends Component {
   render() {
     return (
       <>
-        <section>
+        <section className="container">
           <header>
-            <h1>Ba BOOM!</h1>
+            <h1 className="name">Ba BOOM!</h1>
           </header>
           <section className="scoreboard">
             <h2>{this.state.gameStatus}</h2>
