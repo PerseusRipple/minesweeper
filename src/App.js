@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { WSA_E_NO_MORE } from "constants";
 import Cell from "./components/Cell";
 
 class App extends Component {
   state = {
     game: [[]],
     id: 0,
-    gameStatus: ""
+    gameStatus: "",
+    difficulty: 0
   };
 
   componentDidMount() {
     axios
       .post("https://minesweeper-api.herokuapp.com/games", {
-        difficulty: 0
+        difficulty: this.state.difficulty
       })
       .then(resp => {
         console.log({ resp });
@@ -23,6 +23,32 @@ class App extends Component {
         });
       });
   }
+
+  setDifficulty = event => {
+    console.log(event.target.value);
+    this.setState(
+      {
+        difficulty: event.target.value
+      },
+      () => {
+        this.resetGame();
+      }
+    );
+  };
+
+  resetGame = () => {
+    axios
+      .post("https://minesweeper-api.herokuapp.com/games", {
+        difficulty: this.state.difficulty
+      })
+      .then(resp => {
+        console.log({ resp });
+        this.setState({
+          game: resp.data.board,
+          id: resp.data.id
+        });
+      });
+  };
 
   checkForBomb(x, y) {
     axios
@@ -97,17 +123,27 @@ class App extends Component {
     return (
       <>
         <section className="container">
-          <header>
-            <h1 className="name">Ba BOOM!</h1>
-          </header>
+          <h1 className="name">Ba BOOM!</h1>
           <section className="scoreboard">
             <h2>{this.state.gameStatus}</h2>
             <section className="counter" />
             <section className="timer" />
+            <select onChange={this.setDifficulty} value={this.state.difficulty}>
+              <option value="0">Easy</option>
+              <option value="1">Medium</option>
+              <option value="2">Hard</option>
+            </select>
+            {/* <button className="difficulty" onClick={() => this.setDifficulty()}>
+              Set Difficulty
+            </button> */}
+            <h1>{this.state.gameStatus}</h1>
+            <button className="reset" onClick={() => this.resetGame()}>
+              Reset
+            </button>{" "}
           </section>
         </section>
 
-        <section className="gameboard">
+        <section className="game_board">
           <table>
             <tbody>
               {this.state.game.map((row, x) => {

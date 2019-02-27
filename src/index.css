@@ -12,6 +12,14 @@ body {
   background-color: #9dc5c3;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  border: 1px solid black;
+}
+
 header {
   display: flex;
   justify-content: center;
@@ -22,9 +30,18 @@ header {
 .name {
   display: flex;
   justify-content: center;
+  color: rgba(41, 24, 24, 0.774);
 }
 
-.gameboard {
+.scoreboard {
+  border: 1px dotted black;
+  text-align: center;
+}
+
+.game_board {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 td {
