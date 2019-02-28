@@ -66,7 +66,7 @@ class App extends Component {
         if (resp.data.state === "lost") {
           this.setState({
             game: resp.data.board,
-            gameStatus: "you lost, sorry try again"
+            gameStatus: "Bummer... Try again"
           });
         } else if (resp.data.state === "won") {
           this.setState({
@@ -128,44 +128,48 @@ class App extends Component {
             <h2>{this.state.gameStatus}</h2>
             <section className="counter" />
             <section className="timer" />
-            <select onChange={this.setDifficulty} value={this.state.difficulty}>
-              <option value="0">Easy</option>
-              <option value="1">Medium</option>
-              <option value="2">Hard</option>
-            </select>
-            {/* <button className="difficulty" onClick={() => this.setDifficulty()}>
+            <section className="selector">
+              <select
+                onChange={this.setDifficulty}
+                value={this.state.difficulty}
+              >
+                <option value="0">Easy</option>
+                <option value="1">Medium</option>
+                <option value="2">Hard</option>
+              </select>
+              {/* <button className="difficulty" onClick={() => this.setDifficulty()}>
               Set Difficulty
             </button> */}
-            <h1>{this.state.gameStatus}</h1>
-            <button className="reset" onClick={() => this.resetGame()}>
-              Reset
-            </button>{" "}
+              {/* <h1>{this.state.gameStatus}</h1>  */}
+              <button className="reset" onClick={() => this.resetGame()}>
+                Reset
+              </button>{" "}
+            </section>
           </section>
         </section>
+        <section className="game_board" />
 
-        <section className="game_board">
-          <table>
-            <tbody>
-              {this.state.game.map((row, x) => {
-                return (
-                  <tr key={x}>
-                    {row.map((col, y) => {
-                      return (
-                        <td
-                          key={y}
-                          onClick={() => this.checkForBomb(x, y)}
-                          onContextMenu={() => this.flagTile(x, y)}
-                        >
-                          <Cell character={col} />
-                        </td>
-                      );
-                    })}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
+        <table>
+          <tbody>
+            {this.state.game.map((row, x) => {
+              return (
+                <tr key={x}>
+                  {row.map((col, y) => {
+                    return (
+                      <td
+                        key={y}
+                        onClick={() => this.checkForBomb(x, y)}
+                        onContextMenu={() => this.flagTile(x, y)}
+                      >
+                        <Cell character={col} />
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </>
     );
   }

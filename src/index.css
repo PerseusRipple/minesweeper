@@ -17,13 +17,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  border: 1px solid black;
 }
 
 header {
   display: flex;
   justify-content: center;
-  width: 100%;
+
   background-color: #9dc5c3;
 }
 
@@ -34,14 +33,39 @@ header {
 }
 
 .scoreboard {
-  border: 1px dotted black;
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
 .game_board {
   display: flex;
   justify-content: center;
-  width: 100%;
+}
+
+.selector {
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.reset {
+  width: 3.75rem;
+  height: 1.25rem;
+  margin-left: 1rem;
+  border-radius: 5rem;
+  background-color: #748685;
+  font-weight: bold;
+}
+
+select {
+  background-color: #748685;
+  font-weight: bold;
+}
+
+table {
+  display: flex;
+  justify-content: center;
 }
 
 td {
